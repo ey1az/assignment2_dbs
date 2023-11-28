@@ -3,16 +3,14 @@ package entity;
 public class Orders {
     private int OrderID;
     private Customers CustomerID;
-    private int BookNum;
     private double FullPrice;
 
     public Orders() {
     }
 
-    public Orders(int OrderID, Customers CustomerID, int BookNum, double FullPrice) {
+    public Orders(int OrderID, Customers CustomerID, double FullPrice) {
         this.OrderID = OrderID;
         this.CustomerID = CustomerID;
-        this.BookNum = BookNum;
         this.FullPrice = FullPrice;
     }
 
@@ -32,14 +30,6 @@ public class Orders {
         this.CustomerID = CustomerID;
     }
 
-    public int getBookNum() {
-        return BookNum;
-    }
-
-    public void setBookNum(int BookNum) {
-        this.BookNum = BookNum;
-    }
-
     public double getFullPrice() {
         return FullPrice;
     }
@@ -53,7 +43,6 @@ public class Orders {
         return "Orders{" +
                 "OrderID='" + OrderID + '\'' +
                 ", CustomerID=" + CustomerID +
-                ", BookNum=" + BookNum +
                 ", FullPrice=" + FullPrice +
                 '}';
     }
