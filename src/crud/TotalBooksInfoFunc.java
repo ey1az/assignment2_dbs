@@ -22,7 +22,7 @@ public class TotalBooksInfoFunc extends DBSCon {
         try (Connection connection = connect()) {
             String query = "SELECT B.BookID, B.Title, B.Edition, B.Publisher, B.Pages, B.Year, B.BooksLeft, B.Price, " +
                     "A.AuthorID, A.AuthorFullName, " +
-                    "O.OrderID, O.CustomerID, O.FullPrice, " +
+                    "O.OrderID, O.CustomerID, " +
                     "OB.BookNum " +
                     "FROM Books B " +
                     "JOIN BooksAuthors BA ON B.BookID = BA.BookID " +
@@ -49,7 +49,6 @@ public class TotalBooksInfoFunc extends DBSCon {
 
                     int orderID = res_set.getInt("OrderID");
                     int customerID = res_set.getInt("CustomerID");
-                    double fullPrice = res_set.getDouble("FullPrice");
 
                     int bookNum = res_set.getInt("BookNum");
 
@@ -57,7 +56,7 @@ public class TotalBooksInfoFunc extends DBSCon {
                     Authors author = new Authors(authorID, authorFullName);
                     Customers customer = new Customers();
                     customer.setCustomerID(customerID);
-                    Orders order = new Orders(orderID, customer, fullPrice);
+                    Orders order = new Orders(orderID, customer);
                     OrderedBooks orderedBooks = new OrderedBooks(order, book, bookNum);
 
                     TotalBooksInfo totalBooksInfo = new TotalBooksInfo(book, author, order, orderedBooks);
