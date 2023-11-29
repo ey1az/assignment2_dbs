@@ -18,10 +18,9 @@ public class OrdersFunc extends DBSCon implements OrdersAccess {
     @Override
     public boolean addOrder(Orders Order) {
         try (Connection connection = connect()) {
-            try (PreparedStatement stmnt = connection.prepareStatement("INSERT INTO Orders (OrderID, CustomerID, FullPrice) VALUES (?,?,?)")) {
+            try (PreparedStatement stmnt = connection.prepareStatement("INSERT INTO Orders (OrderID, CustomerID) VALUES (?,?)")) {
                 stmnt.setInt(1, Order.getOrderID());
                 stmnt.setInt(2, Order.getCustomer().getCustomerID());
-                stmnt.setDouble(3, Order.getFullPrice());
                 return stmnt.execute();
             }
         } catch (SQLException sqle) {
@@ -47,11 +46,10 @@ public class OrdersFunc extends DBSCon implements OrdersAccess {
                     int OrderID = res_set.getInt("OrderID");
                     int CustomerID = res_set.getInt("CustomerID");
                     Customers Customer = new Customers(CustomerID, "", "");
-                    double FullPrice = res_set.getDouble("FullPrice");
 
-                    Orders Order = new Orders(OrderID, Customer, FullPrice);
+                    Orders Order = new Orders(OrderID, Customer);
                     OrdersList.add(Order);
-                    System.out.println("Order ID: " + OrderID + ", Customer ID: " + Customer.getCustomerID() + ", Full Price: " + FullPrice);
+                    System.out.println("Order ID: " + OrderID + ", Customer ID: " + Customer.getCustomerID());
                 }
             }
         } catch (SQLException sqle) {
@@ -68,9 +66,8 @@ public class OrdersFunc extends DBSCon implements OrdersAccess {
     @Override
     public boolean updateOrder(Orders Order) {
         try (Connection connection = connect()) {
-            try (PreparedStatement stmnt = connection.prepareStatement("UPDATE Orders SET CustomerID=?, FullPrice=? WHERE OrderID=?")) {
+            try (PreparedStatement stmnt = connection.prepareStatement("UPDATE Orders SET CustomerID=?, WHERE OrderID=?")) {
                 stmnt.setInt(1, Order.getCustomer().getCustomerID());
-                stmnt.setDouble(2, Order.getFullPrice());
                 stmnt.setInt(3, Order.getOrderID());
                 return stmnt.execute();
             }
@@ -115,10 +112,9 @@ public class OrdersFunc extends DBSCon implements OrdersAccess {
                     int RetrievedOrderID = res_set.getInt("OrderID");
                     int CustomerID = res_set.getInt("CustomerID");
                     Customers Customer = new Customers(CustomerID, "", "");
-                    double FullPrice = res_set.getDouble("FullPrice");
 
-                    Order = new Orders(RetrievedOrderID, Customer, FullPrice);
-                    System.out.println("Order ID: " + RetrievedOrderID + ", Customer ID: " + Customer.getCustomerID() + ", Full Price: " + FullPrice);
+                    Order = new Orders(RetrievedOrderID, Customer);
+                    System.out.println("Order ID: " + RetrievedOrderID + ", Customer ID: " + Customer.getCustomerID());
                 }
             }
         } catch (SQLException sqle) {
