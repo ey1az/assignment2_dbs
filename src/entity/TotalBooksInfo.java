@@ -56,7 +56,6 @@ public class TotalBooksInfo {
                ", AuthorFullName: " + Authors.getAuthorFullName() +
                ", OrderID: " + Orders.getOrderID() +
                ", CustomerID: " + Orders.getCustomer().getCustomerID() +
-               ", FullPrice: " + Orders.getFullPrice() +
                ", BookNum: " + OrderedBooks.getBookNum();
     }
 }
