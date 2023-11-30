@@ -66,9 +66,15 @@ public class OrdersFunc extends DBSCon implements OrdersAccess {
     @Override
     public boolean updateOrder(Orders Order) {
         try (Connection connection = connect()) {
-            try (PreparedStatement stmnt = connection.prepareStatement("UPDATE Orders SET CustomerID=?, WHERE OrderID=?")) {
+            Orders existingOrder = getOrderByID(Order.getOrderID());
+
+            if (existingOrder == null) {
+                return false;
+            }
+
+            try (PreparedStatement stmnt = connection.prepareStatement("UPDATE Orders SET CustomerID=? WHERE OrderID=?")) {
                 stmnt.setInt(1, Order.getCustomer().getCustomerID());
-                stmnt.setInt(3, Order.getOrderID());
+                stmnt.setInt(2, Order.getOrderID());
                 return stmnt.execute();
             }
         } catch (SQLException sqle) {
@@ -85,6 +91,12 @@ public class OrdersFunc extends DBSCon implements OrdersAccess {
     @Override
     public boolean deleteOrder(int OrderID) {
         try (Connection connection = connect()) {
+            Orders existingOrder = getOrderByID(OrderID);
+
+            if (existingOrder == null) {
+                return false;
+            }
+
             try (Statement stmnt = connection.createStatement()) {
                 stmnt.execute("DELETE FROM Orders WHERE OrderID = '" + OrderID + "'");
             }

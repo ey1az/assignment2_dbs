@@ -76,7 +76,13 @@ public class BooksFunc extends DBSCon implements BooksAccess {
     @Override
     public boolean updateBook(Books Book) {
         try (Connection connection = connect()) {
-            try (PreparedStatement stmnt = connection.prepareStatement("UPDATE Books SET Title=?, AuthorID=?, Edition=?, Publisher=?, Pages=?, Year=?, BooksLeft=?, Price=? WHERE BookID=?")) {
+            Books existingBook = getBookByID(Book.getBookID());
+
+            if (existingBook == null) {
+                return false;
+            }
+
+            try (PreparedStatement stmnt = connection.prepareStatement("UPDATE Books SET Title=?, Edition=?, Publisher=?, Pages=?, Year=?, BooksLeft=?, Price=? WHERE BookID=?")) {
                 stmnt.setString(1, Book.getTitle());
                 stmnt.setInt(2, Book.getEdition());
                 stmnt.setString(3, Book.getPublisher());
@@ -101,6 +107,12 @@ public class BooksFunc extends DBSCon implements BooksAccess {
     @Override
     public boolean deleteBook(int BookID) {
         try (Connection connection = connect()) {
+            Books existingBook = getBookByID(BookID);
+
+            if (existingBook == null) {
+                return false;
+            }
+
             try (Statement stmnt = connection.createStatement()) {
                 stmnt.execute("DELETE FROM Books WHERE BookID = " + BookID);
             }

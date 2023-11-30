@@ -61,6 +61,12 @@ public class AuthorsFunc extends DBSCon implements AuthorsAccess {
     @Override
     public boolean updateAuthor(Authors Author) {
         try (Connection connection = connect()) {
+            Authors existingAuthor = getAuthorByID(Author.getAuthorId());
+
+            if (existingAuthor == null) {
+                return false;
+            }
+
             try (PreparedStatement stmnt = connection.prepareStatement("UPDATE Authors SET AuthorFullName=? WHERE AuthorID=?")) {
                 stmnt.setString(1, Author.getAuthorFullName());
                 stmnt.setInt(2, Author.getAuthorId());
@@ -80,6 +86,12 @@ public class AuthorsFunc extends DBSCon implements AuthorsAccess {
     @Override
     public boolean deleteAuthor(int AuthorID) {
         try (Connection connection = connect()) {
+            Authors existingAuthor = getAuthorByID(AuthorID);
+            
+            if (existingAuthor == null) {
+                return false;
+            }
+
             try (Statement stmnt = connection.createStatement()) {
                 stmnt.execute("DELETE FROM Authors WHERE AuthorID = " + AuthorID);
             }

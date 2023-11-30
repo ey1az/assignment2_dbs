@@ -65,6 +65,12 @@ public class CustomersFunc extends DBSCon implements CustomersAccess {
     @Override
     public boolean updateCustomer(Customers Customer) {
         try (Connection connection = connect()) {
+            Customers existingCustomer = getCustomersByID(Customer.getCustomerID());
+
+            if (existingCustomer == null) {
+                return false;
+            }
+
             try (PreparedStatement stmnt = connection.prepareStatement("UPDATE Customers SET CustomerFullName=?, CustomerCity=? WHERE CustomerID=?")) {
                 stmnt.setString(1, Customer.getCustomerFullName());
                 stmnt.setString(2, Customer.getCustomerCity());
@@ -85,6 +91,12 @@ public class CustomersFunc extends DBSCon implements CustomersAccess {
     @Override
     public boolean deleteCustomer(int CustomerID) {
         try (Connection connection = connect()) {
+            Customers existingCustomer = getCustomersByID(CustomerID);
+
+            if (existingCustomer == null) {
+                return false;
+            }
+
             try (Statement stmnt = connection.createStatement()) {
                 stmnt.execute("DELETE FROM Customers WHERE CustomerID = " + CustomerID);
             }
