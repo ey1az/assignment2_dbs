@@ -4,13 +4,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import entity.Authors;
-import entity.Books;
-import entity.Customers;
-import entity.OrderedBooks;
-import entity.Orders;
-import entity.BooksAuthors;
-
 public abstract class DBSCon {
     public static Connection connect() {
         String URL = "jdbc:postgresql://localhost:5432/as2_test";
@@ -29,9 +22,4 @@ public abstract class DBSCon {
 
         return connection;
     }
-
-    public static void main(String[] args) {
- 
-    }
 }
-
