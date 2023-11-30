@@ -147,19 +147,18 @@ public class OrderedBooksFunc extends DBSCon implements OrderedBooksAccess {
     
             int existingBookNum = getBookNum(connection, orderedBooks.getOrder().getOrderID(), orderedBooks.getBook().getBookID());
             int existingBookID = getBookID(connection, orderedBooks.getOrder().getOrderID(), orderedBooks.getBook().getBookID());
-
+            
             try (PreparedStatement stmntUpdateOrderedBooks = connection.prepareStatement(
-                    "UPDATE OrderedBooks SET BookID = ?, BookNum = ? WHERE OrderID = ? AND BookID = ?")) {
-                stmntUpdateOrderedBooks.setInt(1, orderedBooks.getBook().getBookID());
-                stmntUpdateOrderedBooks.setInt(2, orderedBooks.getBookNum());
-                stmntUpdateOrderedBooks.setInt(3, orderedBooks.getOrder().getOrderID());
-                stmntUpdateOrderedBooks.setInt(4, existingBookID);
+                    "UPDATE OrderedBooks SET BookNum = ? WHERE OrderID = ? AND BookID = ?")) {
+                stmntUpdateOrderedBooks.setInt(1, orderedBooks.getBookNum());
+                stmntUpdateOrderedBooks.setInt(2, orderedBooks.getOrder().getOrderID());
+                stmntUpdateOrderedBooks.setInt(3, existingBookID);
                 stmntUpdateOrderedBooks.executeUpdate();
             }
     
             try (PreparedStatement stmntUpdateBooks = connection.prepareStatement(
                     "UPDATE Books SET BooksLeft = BooksLeft - ? + ? WHERE BookID = ?")) {
-                int booksLeft = getBooksLeft(connection, orderedBooks.getBook().getBookID());
+                int booksLeft = getBooksLeft(connection, orderedBooks.getBook().getBookID()) + existingBookNum;
                 if (booksLeft < orderedBooks.getBookNum()) {
                     System.out.println("Not enough books available for BookID: " + orderedBooks.getBook().getBookID());
                     return false;
