@@ -20,6 +20,11 @@ public class OrderedBooksFunc extends DBSCon implements OrderedBooksAccess {
     public boolean addOrderedBook(OrderedBooks orderedBooks) {
         try (Connection connection = connect()) {
             connection.setAutoCommit(false);
+
+            if (orderedBooks.getBookNum() <= 0) {
+                System.out.println("Invalid number of books ordered.");
+                return false;
+            }
     
             int booksLeft = getBooksLeft(connection, orderedBooks.getBook().getBookID());
             if (booksLeft < orderedBooks.getBookNum()) {
@@ -145,9 +150,14 @@ public class OrderedBooksFunc extends DBSCon implements OrderedBooksAccess {
         try (Connection connection = connect()) {
             connection.setAutoCommit(false);
     
+            if (orderedBooks.getBookNum() <= 0) {
+                System.out.println("Invalid number of books ordered.");
+                return false;
+            }
+
             int existingBookNum = getBookNum(connection, orderedBooks.getOrder().getOrderID(), orderedBooks.getBook().getBookID());
             int existingBookID = getBookID(connection, orderedBooks.getOrder().getOrderID(), orderedBooks.getBook().getBookID());
-            
+
             try (PreparedStatement stmntUpdateOrderedBooks = connection.prepareStatement(
                     "UPDATE OrderedBooks SET BookNum = ? WHERE OrderID = ? AND BookID = ?")) {
                 stmntUpdateOrderedBooks.setInt(1, orderedBooks.getBookNum());
