@@ -27,7 +27,7 @@ public class Main {
         TotalBooksInfo TotalBooksInfo = new TotalBooksInfo();
         
 
-        Authors newAuthor = new Authors(5, "Kole Watson");
+        Authors newAuthor = new Authors(1, "Kole Watson");
 
         // AuthorsFunc.addAuthor(newAuthor);
         // AuthorsFunc.deleteAuthor(5);
@@ -35,7 +35,7 @@ public class Main {
         // AuthorsFunc.getAuthorByID(4);
         // AuthorsFunc.getAllAuthors();
 
-        Books newBook = new Books(3, "Python Guide", 6, "Kate Je", 107, 2019, 16, 49.99);
+        Books newBook = new Books(1, "Python Guide", 6, "Kate Je", 107, 2019, 16, 49.99);
 
         // BooksFunc.addBook(newBook);
         // BooksFunc.deleteBook(3);
@@ -43,7 +43,7 @@ public class Main {
         // BooksFunc.getBookByID(3);
         // BooksFunc.getAllBooks();
 
-        Customers newCustomer = new Customers(5, "John Smith", "Kyoto");
+        Customers newCustomer = new Customers(1, "John Smith", "Kyoto");
 
         // CustomersFunc.addCustomer(newCustomer);
         // CustomersFunc.deleteCustomer(5);
@@ -51,7 +51,7 @@ public class Main {
         // CustomersFunc.getCustomersByID(5);
         // CustomersFunc.getAllCustomers();
             
-        Orders newOrder = new Orders(15, newCustomer);
+        Orders newOrder = new Orders(1, newCustomer);
 
         // OrdersFunc.addOrder(newOrder);
         // OrdersFunc.deleteOrder(15);
