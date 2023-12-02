@@ -71,14 +71,6 @@ public class BooksAuthorsFunc extends DBSCon implements BooksAuthorsAccess {
     @Override
     public boolean updateBookAuthor(BooksAuthors BooksAuthors) {
         try (Connection connection = connect()) {
-            int AuthorID = BooksAuthors.getBookAuthor().getAuthorId();
-            int BookID = BooksAuthors.getAuthorBook().getBookID();
-            BooksAuthors existingBooksAuthors = getBookAndAuthorByID(AuthorID, BookID);
-
-            if (existingBooksAuthors == null) {
-                return false;
-            }
-
             try (PreparedStatement stmnt = connection.prepareStatement("UPDATE BooksAuthors SET BookID=? WHERE AuthorID=?")) {
                 stmnt.setInt(1, BooksAuthors.getAuthorBook().getBookID());
                 stmnt.setInt(2, BooksAuthors.getBookAuthor().getAuthorId());

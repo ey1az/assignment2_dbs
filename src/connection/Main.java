@@ -1,5 +1,7 @@
 package connection;
 
+import java.sql.SQLException;
+
 import crud.AuthorsFunc;
 import crud.BooksFunc;
 import crud.CustomersFunc;
@@ -27,20 +29,20 @@ public class Main {
         TotalBooksInfo TotalBooksInfo = new TotalBooksInfo();
         
 
-        Authors newAuthor = new Authors(1, "Kole Watson");
+        Authors newAuthor = new Authors(2, "Alex Oe");
 
         // AuthorsFunc.addAuthor(newAuthor);
-        // AuthorsFunc.deleteAuthor(5);
+        // AuthorsFunc.deleteAuthor(1);
         // AuthorsFunc.updateAuthor(newAuthor);
-        // AuthorsFunc.getAuthorByID(4);
+        // AuthorsFunc.getAuthorByID(1);
         // AuthorsFunc.getAllAuthors();
 
-        Books newBook = new Books(1, "Python Guide", 6, "Kate Je", 107, 2019, 16, 49.99);
+        Books newBook = new Books(2, "Python Guide", 12, "Kate Je", 107, 2019, 16, 49.99);
 
         // BooksFunc.addBook(newBook);
-        // BooksFunc.deleteBook(3);
+        // BooksFunc.deleteBook(1);
         // BooksFunc.updateBook(newBook);
-        // BooksFunc.getBookByID(3);
+        // BooksFunc.getBookByID(1);
         // BooksFunc.getAllBooks();
 
         Customers newCustomer = new Customers(1, "John Smith", "Kyoto");
@@ -48,31 +50,31 @@ public class Main {
         // CustomersFunc.addCustomer(newCustomer);
         // CustomersFunc.deleteCustomer(5);
         // CustomersFunc.updateCustomer(newCustomer);
-        // CustomersFunc.getCustomersByID(5);
+        // CustomersFunc.getCustomersByID(2);
         // CustomersFunc.getAllCustomers();
             
         Orders newOrder = new Orders(1, newCustomer);
 
         // OrdersFunc.addOrder(newOrder);
-        // OrdersFunc.deleteOrder(15);
+        // OrdersFunc.deleteOrder(1);
         // OrdersFunc.updateOrder(newOrder);
-        // OrdersFunc.getOrderByID(12);
+        // OrdersFunc.getOrderByID(1);
         // OrdersFunc.getAllOrders();
 
-        OrderedBooks newOrderedBooks = new OrderedBooks(newOrder, newBook, 30);
+        OrderedBooks newOrderedBooks = new OrderedBooks(newOrder, newBook, 16);
 
         // OrderedBooksFunc.addOrderedBook(newOrderedBooks);
-        // OrderedBooksFunc.deleteOrderedBook(15, 3);
+        // OrderedBooksFunc.deleteOrderedBook(1, 2);
         // OrderedBooksFunc.updateOrderedBook(newOrderedBooks);
-        // OrderedBooksFunc.getOrderedBookAndOrderByID(15, 3);
+        // OrderedBooksFunc.getOrderedBookAndOrderByID(1, 1);
         // OrderedBooksFunc.getAllOrderedBooks();
 
         BooksAuthors newBookAuthor = new BooksAuthors(newAuthor, newBook);
 
         // BooksAuthorsFunc.addBookAuthor(newBookAuthor);
-        // BooksAuthorsFunc.deleteBookAuthor(4, 3);
+        // BooksAuthorsFunc.deleteBookAuthor(2, 2);
         // BooksAuthorsFunc.updateBookAuthor(newBookAuthor);
-        // BooksAuthorsFunc.getBookAndAuthorByID(4, 2);
+        // BooksAuthorsFunc.getBookAndAuthorByID(2, 1);
         // BooksAuthorsFunc.getAllBooksAuthors();
 
         TotalBooksInfoFunc totalBooksInfoFunc = new TotalBooksInfoFunc();

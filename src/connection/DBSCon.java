@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public abstract class DBSCon {
     public static Connection connect() {
-        String URL = "jdbc:postgresql://localhost:5432/as2_test";
+        String URL = "jdbc:postgresql://localhost:5432/as2_dbs";
         String user = "postgres";
         String password = "admin1234";
 
