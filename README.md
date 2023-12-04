@@ -45,6 +45,11 @@ Before you begin, ensure you have met the following requirements:
    cd assignment2_dbs
    ```
 
+3. Add PostgreSQL JDBC Driver to the Project:
+
+   1. Go to the "lib" folder in the cloned repository.
+   2. Add the "postgresql-42.7.0.jar" into the "Referenced Libraries" section of the Java Project.
+
 ## Usage
 
 1. Run the Main class
