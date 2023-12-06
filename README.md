@@ -54,7 +54,7 @@ Before you begin, ensure you have met the following requirements:
 
 1. Run the Main class
 
-   - Execute the Main.java class in the connection package to run the application.
+   - Execute the Main.java class to run the application.
    - This will demonstrate various functionalities, including database connectivity, CRUD operations, and metadata access.
 
 2. Explore Functionalities:
