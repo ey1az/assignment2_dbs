@@ -11,7 +11,6 @@ This Java application focuses on designing and interacting with databases. The f
 - [Usage](#usage)
 - [Database Configuration](#database-configuration)
 - [ER Diagram and Table Schema](#er-diagram-and-table-schema)
-- [⚠️ Disclaimer ⚠️](#disclaimer)
 
 ## Introduction
 
